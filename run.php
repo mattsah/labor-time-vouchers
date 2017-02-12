@@ -35,11 +35,11 @@ while(true) {
 
         foreach ($goods[$name]['goods'] as $mop => $quantity) {
             if ($quantity > $goods[$mop]['total']) {
-                throw new Exception(sprintf(
+                die(sprintf(
                     'Production cannot continue, not enough units of "%s", requires +%s',
                     $goods[$mop]['name'],
                     $quantity - $goods[$mop]['total']
-                ));
+                ) . PHP_EOL);
 
             } else {
                 $goods[$mop]['total'] = $goods[$mop]['total'] - $quantity;
