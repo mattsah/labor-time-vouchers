@@ -5,7 +5,12 @@ $goods  = array();
 $rtimes = array();
 
 foreach (glob(__DIR__ . '/goods/*.php') as $good) {
-    $name         = basename($good, '.php');
+    $name = basename($good, '.php');
+
+    if ($name == 'example') {
+        continue;
+    }
+
     $goods[$name] = include($good);
 }
 
@@ -21,14 +26,14 @@ foreach ($goods as $name => $good) {
 echo PHP_EOL;
 
 while(true) {
-    foreach ($goods as $name => $good) {
-        $rtimes[$name] = $good['rtime'];
+    foreach (array_keys($goods) as $name) {
+        $rtimes[$name] = $goods[$name]['rtime'];
     }
 
-    foreach ($goods as $name => $good) {
-        $rtime = $good['labor'];
+    foreach (array_keys($goods) as $name) {
+        $rtime = $goods[$name]['labor'];
 
-        foreach ($good['goods'] as $mop => $quantity) {
+        foreach ($goods[$name]['goods'] as $mop => $quantity) {
             if ($quantity > $goods[$mop]['total']) {
                 throw new Exception(sprintf(
                     'Production cannot continue, not enough units of "%s", requires +%s',
@@ -43,12 +48,12 @@ while(true) {
             $rtime = $rtime + ($goods[$mop]['rtime'] * $quantity);
         }
 
-        $goods[$name]['rtime'] = $rtime / $good['count'];
-        $goods[$name]['total'] = $good['total'] + $good['count'];
+        $goods[$name]['rtime'] = $rtime / $goods[$name]['count'];
+        $goods[$name]['total'] = $goods[$name]['total'] + $goods[$name]['count'];
     }
 
-    foreach ($goods as $name => $good) {
-        if ($rtimes[$name] != $good['rtime']) {
+    foreach (array_keys($goods) as $name) {
+        if ($rtimes[$name] != $goods[$name]['rtime']) {
             continue 2;
         }
     }

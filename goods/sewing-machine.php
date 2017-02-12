@@ -4,10 +4,10 @@ return [
     'name'  => '1 Sewing Machine',
     'total' => 10,
     'labor' => 25,
-    'count' => 2,
+    'count' => 1,
     'rtime' => 10,
     'goods' => [
-        'steel'          => 20,
-        'plastic'        => 10,
+        'steel'   => 20,
+        'plastic' => 10,
     ]
 ];
