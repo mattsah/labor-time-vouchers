@@ -2,9 +2,9 @@
 
 return [
     'name'  => '1 Pound of Steel',
-    'total' => 102,
+    'total' => 108,
     'labor' => 40,
-    'count' => 102,
+    'count' => 108,
     'rtime' => 30,
     'goods' => [
         'steel' => 80

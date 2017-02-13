@@ -7,7 +7,7 @@ return [
     'count' => 1,
     'rtime' => 10,
     'goods' => [
-        'steel'   => 20,
-        'plastic' => 10,
+        'steel'   => 1,
+        'plastic' => 3,
     ]
 ];
